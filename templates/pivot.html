@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Pivot Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3 class="text-center">
+                Pivot Table Generator
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form action="/pivot_table" method="POST">
+<input type="hidden" name="workspace_id" value="{{ workspace_id }}">
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Row (Index)
+                    </label>
+
+                    <select name="index" class="form-select">
+
+                        {% for column in columns %}
+
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Column
+                    </label>
+
+                    <select name="columns" class="form-select">
+
+                        {% for column in columns %}
+
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Values
+                    </label>
+
+                    <select name="values" class="form-select">
+
+                        {% for column in columns %}
+
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Aggregation Function
+                    </label>
+
+                    <select name="aggfunc" class="form-select">
+
+                        <option value="sum">Sum</option>
+                        <option value="mean">Mean</option>
+                        <option value="count">Count</option>
+                        <option value="min">Minimum</option>
+                        <option value="max">Maximum</option>
+                        <option value="median">Median</option>
+                        <option value="std">Standard Deviation</option>
+
+                    </select>
+
+                </div>
+
+                <button class="btn btn-primary w-100">
+
+                    Generate Pivot Table
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+body{
+
+    background:#f5f7fb;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+.workspace-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    border:1px solid #e5e7eb;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.workspace-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    border-color:#0d6efd;
+
+}
+
+.icon{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.workspace-card h4{
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+
+.workspace-card p{
+
+    color:#6c757d;
+
+    font-size:15px;
+
+    margin:0;
+
+}
+
+h1{
+
+    font-weight:700;
+
+}
+
+.text-muted{
+
+    font-size:16px;
+
+}

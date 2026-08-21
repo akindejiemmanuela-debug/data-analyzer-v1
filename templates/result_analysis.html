@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>Analysis Result</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<style>
+
+body {
+    background: #f5f7fb;
+}
+
+.header-card {
+    border: none;
+    border-radius: 18px;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    transition: 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.result-box {
+    border-radius: 15px;
+    background: #f8f9fa;
+    padding: 25px;
+}
+
+.result-number {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.action-btn {
+    margin: 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<!-- HEADER -->
+
+<div class="card shadow-lg header-card mb-4">
+
+<div class="card-header bg-primary text-white p-4">
+
+<h2 class="mb-1">
+📊 Analysis Result
+</h2>
+
+<p class="mb-0">
+Detailed analysis of your selected dataset column.
+</p>
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<strong>Column:</strong>
+
+<span class="badge bg-primary">
+{{ column }}
+</span>
+
+</div>
+
+<div class="col-md-6">
+
+<strong>Operation:</strong>
+
+<span class="badge bg-success">
+{{ operation|title }}
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MAIN RESULT -->
+
+<div class="card shadow mb-4">
+
+<div class="card-body text-center">
+
+<h5 class="text-muted">
+{{ result_name }}
+</h5>
+
+<div class="result-number text-primary">
+
+{{ result_value }}
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DATASET INFORMATION -->
+
+<div class="row g-3 mb-4">
+
+<div class="col-6 col-md-3">
+
+<div class="card stat-card shadow-sm">
+
+<div class="card-body text-center">
+
+<h6 class="text-muted">
+Values
+</h6>
+
+<h3>
+{{ total_values }}
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-6 col-md-3">
+
+<div class="card stat-card shadow-sm">
+
+<div class="card-body text-center">
+
+<h6 class="text-muted">
+Missing
+</h6>
+
+<h3 class="text-danger">
+{{ missing_values }}
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-6 col-md-3">
+
+<div class="card stat-card shadow-sm">
+
+<div class="card-body text-center">
+
+<h6 class="text-muted">
+Unique
+</h6>
+
+<h3>
+{{ unique_values }}
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-6 col-md-3">
+
+<div class="card stat-card shadow-sm">
+
+<div class="card-body text-center">
+
+<h6 class="text-muted">
+Data Type
+</h6>
+
+<h3>
+
+{% if is_numeric %}
+🔢 Numeric
+{% else %}
+🔤 Text
+{% endif %}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NUMERIC STATISTICS -->
+
+{% if is_numeric %}
+
+<div class="card shadow mb-4">
+
+<div class="card-header bg-dark text-white">
+
+<h4 class="mb-0">
+📈 Numeric Statistics
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+<table class="table table-bordered">
+
+<thead class="table-light">
+
+<tr>
+
+<th>Statistic</th>
+
+<th>Value</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>Mean</td>
+<td>{{ numeric_stats.mean }}</td>
+</tr>
+
+<tr>
+<td>Median</td>
+<td>{{ numeric_stats.median }}</td>
+</tr>
+
+<tr>
+<td>Minimum</td>
+<td>{{ numeric_stats.minimum }}</td>
+</tr>
+
+<tr>
+<td>Maximum</td>
+<td>{{ numeric_stats.maximum }}</td>
+</tr>
+
+<tr>
+<td>Standard Deviation</td>
+<td>{{ numeric_stats.std }}</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+<!-- EXPLANATION -->
+
+<div class="card shadow mb-4">
+
+<div class="card-header bg-info text-white">
+
+<h4>
+📖 Plain English
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p class="mb-0">
+{{ explanation }}
+</p>
+
+</div>
+
+</div>
+
+
+<!-- INSIGHT -->
+
+<div class="card shadow mb-4">
+
+<div class="card-header bg-success text-white">
+
+<h4>
+💡 Key Insight
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p class="mb-0">
+{{ insight }}
+</p>
+
+</div>
+
+</div>
+
+
+<!-- RECOMMENDATION -->
+
+<div class="card shadow mb-4">
+
+<div class="card-header bg-warning">
+
+<h4>
+🚀 Recommendation
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<p class="mb-0">
+{{ recommendation }}
+</p>
+
+</div>
+
+</div>
+
+
+<!-- RESULT TABLE -->
+
+<div class="card shadow mb-4">
+
+<div class="card-header">
+
+<h4>
+📋 Analysis Table
+</h4>
+
+</div>
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+{{ table|safe }}
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="text-center mt-4">
+
+<a
+href="/analysis?workspace_id={{ workspace_id }}"
+class="btn btn-primary action-btn">
+
+🔄 Analyze Another Column
+
+</a>
+
+<a
+href="/statistics?workspace_id={{ workspace_id }}"
+class="btn btn-dark action-btn">
+
+📊 Statistics
+
+</a>
+
+<a
+href="/groupby?workspace_id={{ workspace_id }}"
+class="btn btn-success action-btn">
+
+📦 Group By
+
+</a>
+
+<a
+href="/pivot_table?workspace_id={{ workspace_id }}"
+class="btn btn-info action-btn">
+
+📑 Pivot Table
+
+</a>
+
+<a
+href="/data_cleaning?workspace_id={{ workspace_id }}"
+class="btn btn-warning action-btn">
+
+🧹 Data Cleaning
+
+</a>
+
+<a
+href="/filter?workspace_id={{ workspace_id }}"
+class="btn btn-secondary action-btn">
+
+🔎 Filter
+
+</a>
+
+<a
+href="/sorting?workspace_id={{ workspace_id }}"
+class="btn btn-secondary action-btn">
+
+↕ Sort
+
+</a>
+
+<a
+href="/dashboard?workspace_id={{ workspace_id }}"
+class="btn btn-outline-dark action-btn">
+
+🏠 Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

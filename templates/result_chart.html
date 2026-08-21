@@ -1,0 +1,230 @@
+<!DOCTYPE html>  <html>  <head>  <meta charset="UTF-8">  <title>Interactive Dashboard</title>  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"> <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
+ <script src="{{ url_for('static', filename='js/echarts.min.js') }}"></script>    
+  
+ 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="/">
+            📊 Data Analytics Dashboard
+        </a>
+
+        <div class="ms-auto">
+
+            <a href="/" class="btn btn-outline-light me-2">
+                Home
+            </a>
+
+            <a href="/charts" class="btn btn-success me-2">
+                Charts
+            </a>
+
+            <a href="/saved_charts" class="btn btn-warning">
+                Saved Charts
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+  </head>  <body>  <div class="container py-4"> <div class="text-end mb-3">
+    <button class="btn btn-dark" onclick="toggleTheme()" id="themeBtn">
+        🌙 Dark Mode
+    </button>
+</div><div class="row mb-4">
+
+   <div class="col-md-2">
+    <div class="card shadow kpi-card rows text-center"
+     onclick="document.getElementById('dataTable').scrollIntoView({behavior:'smooth'})">
+        <div class="card-body">
+
+            <h6 class="kpi-title">📊 Total Rows</h6>
+
+            <h3 class="kpi-value counter">{{ rows }}</h3>
+
+            <small class="up">Live Data</small>
+
+        </div>
+    </div>
+</div>
+
+    <div class="col-md-2">
+    <div class="card shadow kpi-card total text-center"
+     onclick="myChart.dispatchAction({type:'highlight',seriesIndex:0,dataIndex:0})">
+        <div class="card-body">
+
+            <h6 class="kpi-title">💰 Total</h6>
+
+            <h3 class="kpi-value counter">{{ total }}</h3>
+
+            <small class="up">▲ +12%</small>
+
+        </div>
+    </div>
+</div>
+
+   <div class="col-md-2">
+   <div class="card shadow kpi-card average text-center"
+     onclick="myChart.dispatchAction({type:'downplay',seriesIndex:0})">
+        <div class="card-body">
+
+            <h6 class="kpi-title">📈 Average</h6>
+
+            <h3 class="kpi-value counter">{{ average }}</h3>
+
+            <small class="up">▲ +4%</small>
+
+        </div>
+    </div>
+</div>
+
+    <div class="col-md-3">
+    <div class="card shadow kpi-card maximum text-center"
+     onclick="highlightMaximum()">
+        <div class="card-body">
+
+            <h6 class="kpi-title">🚀 Maximum</h6>
+
+            <h3 class="kpi-value counter">{{ maximum }}</h3>
+
+            <small class="up">Highest Value</small>
+
+        </div>
+    </div>
+</div>
+
+    <div class="col-md-3">
+   <div class="card shadow kpi-card minimum text-center"
+     onclick="highlightMinimum()">
+        <div class="card-body">
+
+            <h6 class="kpi-title">📉 Minimum</h6>
+
+            <h3 class="kpi-value counter">{{ minimum }}</h3>
+
+            <small class="down">Lowest Value</small>
+
+        </div>
+    </div>
+</div>
+</div> <div class="row mb-3">
+
+    <div class="col-md-4">
+        <select class="form-select" id="chartFilter">
+            <option value="">All Categories</option>
+
+            {% for label in labels %}
+            <option value="{{ label }}">{{ label }}</option>
+            {% endfor %}
+
+        </select>
+    </div>
+
+<div class="row mb-3">
+
+    <div class="col-md-6">
+
+        <input
+            type="text"
+            id="searchBox"
+            class="form-control"
+            placeholder="🔍 Search category..."
+            onkeyup="searchChart()">
+
+    </div>
+
+</div>
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100"
+        onclick="filterChart()">
+            Filter
+        </button>
+    </div>
+
+</div> <div class="card shadow-lg">  <div class="card-header bg-success text-white">  <h2 class="text-center">  📊 Interactive Dashboard
+
+</h2>  </div>  <div class="card-body">  <div class="row">
+
+    <div class="col-md-6">
+        <div id="chart" style="height:650px;"></div>
+    </div>
+
+    <div class="col-md-6">
+        <div id="chart2" style="height:650px;"></div>
+    </div>
+
+</div>  </div>  </div> <div class="card shadow mt-4" id="dataTable">
+
+    <div class="card-header bg-primary text-white">
+        <h4>📋 Data Table</h4>
+    </div>
+
+    <div class="card-body table-responsive">
+
+        <table class="table table-striped table-hover">
+
+            <thead>
+
+                <tr>
+                    <th>{{ x }}</th>
+                    <th>{{ y }}</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for row in table_data %}
+
+                <tr>
+                    <td>{{ row[x] }}</td>
+                    <td>{{ row[y] }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div> <div class="text-center mt-4">  <a href="/charts" class="btn btn-success">  Generate Another Chart
+
+</a>  <a href="/" class="btn btn-dark">  Home
+
+</a>  <form action="/save_chart" method="POST" class="d-inline">  <input  
+type="hidden"  
+name="chart_type"  
+value="{{ chart }}">
+<a href="/export_csv" class="btn btn-warning">
+    📥 Export CSV
+</a><button class="btn btn-warning" onclick="goDrilldown()">
+    🔍 Drill Down
+</button>
+<form action="/share_chart" method="POST" class="d-inline">
+
+    <input type="hidden" name="labels" value='{{ labels|tojson }}'>
+    <input type="hidden" name="values" value='{{ values|tojson }}'>
+    <input type="hidden" name="chart_type" value="{{ chart }}">
+
+    <button class="btn btn-warning">
+        🔗 Share Chart
+    </button>
+
+</form>
+
+<button class="btn btn-primary">  💾 Save Chart
+
+</button>  </form>  </div>  </div> <script>
+const labels = {{ labels|tojson }};
+const values = {{ values|tojson }};
+const chartType = "{{ chart }}";
+const yTitle = "{{ y }}";
+</script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>  </body>  </html> 

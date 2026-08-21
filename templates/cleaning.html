@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Cleaning</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-warning">
+
+<h3 class="text-center">
+Data Cleaning
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<form action="/cleaning" method="POST">
+<input type="hidden" name="workspace_id" value="{{ workspace_id }}">
+<label class="form-label">
+Cleaning Operation
+</label>
+
+<select name="operation" class="form-select">
+
+<option value="drop_duplicates">
+Remove Duplicate Rows
+</option>
+
+<option value="dropna">
+Remove Missing Values
+</option>
+
+<option value="fillna">
+Fill Missing Values with 0
+</option>
+
+<option value="reset_index">
+Reset Index
+</option>
+
+</select>
+
+<br>
+
+<button class="btn btn-warning w-100">
+Clean Dataset
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Data Analysis Result</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+<h1 class="text-center">
+Data Analysis Result
+</h1>
+
+<hr>
+
+<div class="row text-center">
+
+<div class="col">
+<div class="card">
+<div class="card-body">
+<h5>Rows</h5>
+<h3>{{ rows }}</h3>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card">
+<div class="card-body">
+<h5>Columns</h5>
+<h3>{{ columns }}</h3>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card">
+<div class="card-body">
+<h5>Missing</h5>
+<h3>{{ missing_values }}</h3>
+</div>
+</div>
+</div>
+
+<div class="col">
+<div class="card">
+<div class="card-body">
+<h5>Duplicates</h5>
+<h3>{{ duplicates_rows }}</h3>
+</div>
+</div>
+</div>
+
+</div>
+
+<br>
+
+<input
+type="text"
+class="form-control"
+placeholder="🔍 Search dataset...">
+
+<br>
+
+{{ table|safe }}
+
+<div class="text-center mt-4">
+
+<a href="{{ url_for('dashboard', workspace_id=workspace_id) }}">
+    Dashboard
+</a>
+
+<a href="/workspace" class="btn btn-secondary">
+📁 Back to Workspace
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

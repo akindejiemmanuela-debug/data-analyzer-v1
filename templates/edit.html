@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Edit Dataset</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f5f7fb;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+}
+
+.card-header{
+    border-radius:15px 15px 0 0 !important;
+}
+
+.operation-info{
+    display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-info text-white">
+
+<h2>
+✏ Dataset Editor
+</h2>
+
+<p class="mb-0">
+Modify, clean and transform your dataset before analysis.
+</p>
+
+</div>
+
+<div class="card-body">
+
+<form action="/edit" method="POST">
+
+<!-- OPERATION -->
+
+<div class="mb-3">
+
+<label class="form-label">
+Choose Operation
+</label>
+
+<select
+id="operation"
+name="operation"
+class="form-select">
+
+<optgroup label="Column Operations">
+
+<option value="rename">Rename Column</option>
+
+<option value="delete">Delete Column</option>
+
+<option value="duplicate">Duplicate Column</option>
+
+<option value="datatype">Change Data Type</option>
+
+</optgroup>
+
+<optgroup label="Data Cleaning">
+
+<option value="replace">Replace Values</option>
+
+<option value="fillna">Fill Missing Values</option>
+
+<option value="removeduplicates">Remove Duplicate Rows</option>
+
+<option value="removeblank">Remove Blank Rows</option>
+
+</optgroup>
+
+<optgroup label="Create Columns">
+
+<option value="newcolumn">New Constant Column</option>
+
+<option value="formula">Formula Column</option>
+
+<option value="grade">Grade Students</option>
+
+<option value="rank">Rank Students</option>
+
+<option value="percentage">Percentage</option>
+
+<option value="passfail">Pass / Fail</option>
+
+</optgroup>
+
+<optgroup label="Text">
+
+<option value="uppercase">Uppercase</option>
+
+<option value="lowercase">Lowercase</option>
+
+<option value="titlecase">Title Case</option>
+
+<option value="trim">Trim Spaces</option>
+
+</optgroup>
+
+</select>
+
+</div>
+
+<!-- COLUMN -->
+
+<div class="mb-3" id="columnBox">
+
+<label class="form-label">
+
+Column
+
+</label>
+
+<select
+name="column"
+class="form-select">
+
+{% for column in columns %}
+
+<option value="{{ column }}">
+{{ column }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<!-- INPUT 1 -->
+
+<div class="mb-3">
+
+<input
+id="value1"
+name="value1"
+class="form-control"
+placeholder="Value">
+
+</div>
+
+<!-- INPUT 2 -->
+
+<div class="mb-3">
+
+<input
+id="value2"
+name="value2"
+class="form-control"
+placeholder="Value">
+
+</div>
+
+<!-- DESCRIPTION -->
+
+<div
+id="info"
+class="alert alert-secondary">
+
+Choose an operation to see instructions.
+
+</div>
+
+<div class="d-grid gap-2">
+
+<button class="btn btn-info">
+
+Apply Changes
+
+</button>
+
+<a href="/" class="btn btn-dark">
+
+Back to Dashboard
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const operation=document.getElementById("operation");
+
+const columnBox=document.getElementById("columnBox");
+
+const value1=document.getElementById("value1");
+
+const value2=document.getElementById("value2");
+
+const info=document.getElementById("info");
+
+function updateForm(){
+
+columnBox.style.display="block";
+
+value1.style.display="block";
+
+value2.style.display="block";
+
+switch(operation.value){
+
+case "rename":
+
+value1.placeholder="New column name";
+
+value2.style.display="none";
+
+info.innerHTML=
+"<b>Rename Column</b><br>Change the name of an existing column.";
+
+break;
+
+case "delete":
+
+value1.style.display="none";
+
+value2.style.display="none";
+
+info.innerHTML=
+"<b>Delete Column</b><br>Permanently removes the selected column.";
+
+break;
+
+case "replace":
+
+value1.placeholder="Old value";
+
+value2.placeholder="New value";
+
+info.innerHTML=
+"<b>Replace Values</b><br>Replace one value with another.";
+
+break;
+
+case "newcolumn":
+
+value1.placeholder="New column name";
+
+value2.placeholder="Value for every row";
+
+info.innerHTML=
+"<b>New Column</b><br>Create a column containing the same value.";
+
+break;
+
+case "formula":
+
+value1.placeholder="New column name";
+
+value2.placeholder="Example: Sales - Cost";
+
+info.innerHTML=
+"<b>Formula Column</b><br><br>\
+Examples:<br>\
+Sales - Cost<br>\
+Profit / Sales<br>\
+Math + English + Science<br>\
+Quantity * Price";
+
+break;
+
+case "grade":
+
+value1.placeholder="Pass mark (Example 50)";
+
+value2.placeholder="Grade column name";
+
+info.innerHTML=
+"<b>Grade Students</b><br>Automatically assigns grades.";
+
+break;
+
+case "rank":
+
+value1.placeholder="Highest or Lowest";
+
+value2.placeholder="Rank column name";
+
+info.innerHTML=
+"<b>Rank Students</b><br>Create class ranking.";
+
+break;
+
+case "percentage":
+
+value1.placeholder="Total Marks";
+
+value2.placeholder="Percentage column name";
+
+info.innerHTML=
+"<b>Percentage</b><br>Convert scores into percentages.";
+
+break;
+
+case "passfail":
+
+value1.placeholder="Pass Mark";
+
+value2.placeholder="Status column";
+
+info.innerHTML=
+"<b>Pass / Fail</b><br>Create Pass or Fail status.";
+
+break;
+
+case "uppercase":
+
+case "lowercase":
+
+case "titlecase":
+
+case "trim":
+
+value1.style.display="none";
+
+value2.style.display="none";
+
+info.innerHTML=
+"<b>Text Operation</b><br>Transforms text inside the selected column.";
+
+break;
+
+default:
+
+info.innerHTML="Configure the selected operation.";
+
+}
+
+}
+
+operation.addEventListener("change",updateForm);
+
+updateForm();
+
+</script>
+
+</body>
+
+</html>

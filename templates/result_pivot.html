@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pivot Table Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        Pivot Table Result
+    </h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            {{ table|safe }}
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a href="/pivot_table" class="btn btn-success">
+        Create Another Pivot Table
+    </a>
+
+    <a href="/groupby" class="btn btn-primary">
+        Group By
+    </a>
+
+    <a href="/" class="btn btn-secondary">
+        Upload New Dataset
+    </a>
+
+</div>
+
+</body>
+</html>

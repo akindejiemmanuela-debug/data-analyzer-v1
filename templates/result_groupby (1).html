@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group By</title>
+</head>
+<body>
+
+    <h1>Group By Analysis</h1>
+
+    <form action="/groupby" method="POST">
+
+        <label for="group_column">Group By Column</label><br>
+        <input type="text" id="group_column" name="group_column" required>
+
+        <br><br>
+
+        <label for="value_column">Value Column</label><br>
+        <input type="text" id="value_column" name="value_column" required>
+
+        <br><br>
+
+        <label for="operation">Operation</label><br>
+
+        <select id="operation" name="operation">
+
+            <option value="sum">Sum</option>
+
+            <option value="mean">Mean</option>
+
+            <option value="count">Count</option>
+
+            <option value="min">Minimum</option>
+
+            <option value="max">Maximum</option>
+
+            <option value="median">Median</option>
+
+            <option value="std">Standard Deviation</option>
+
+            <option value="var">Variance</option>
+
+            <option value="prod">Product (Multiply)</option>
+
+            <option value="first">First Value</option>
+
+            <option value="last">Last Value</option>
+
+            <option value="nunique">Unique Count</option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">Analyze</button>
+
+    </form>
+
+</body>
+</html>

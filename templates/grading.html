@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Grading System</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h3>
+
+Create Grading System
+
+</h3>
+
+</div>
+
+<div class="card-body">
+
+<form
+action="/save_grading"
+method="POST">
+
+<div class="mb-3">
+
+<label>
+
+System Name
+
+</label>
+
+<input
+name="system_name"
+class="form-control"
+placeholder="Example: WAEC">
+
+</div>
+
+<table
+class="table table-bordered"
+id="gradeTable">
+
+<thead>
+
+<tr>
+
+<th>Minimum</th>
+
+<th>Maximum</th>
+
+<th>Grade</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+<input
+name="minimum"
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+name="maximum"
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+name="grade"
+class="form-control">
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="addRow()">
+
++ Add Grade
+
+</button>
+
+<button
+class="btn btn-success">
+
+Save Grading System
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function addRow(){
+
+let table =
+document.querySelector("#gradeTable tbody");
+
+let row =
+table.insertRow();
+
+row.innerHTML = `
+
+<td>
+
+<input
+name="minimum"
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+name="maximum"
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+name="grade"
+class="form-control">
+
+</td>
+
+`;
+
+}
+
+</script>
+
+</body>
+
+</html>

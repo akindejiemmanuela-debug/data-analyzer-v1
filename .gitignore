@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+*.log
+# Local/generated analysis outputs
+filtered.csv
+analysis.csv
+correlation.csv
+groupby.csv
+pivot_table.csv
+sorting.csv
+statistics.csv
+edit.csv
+edited.csv
+analysis_report.xlsx
+AI_Report.pdf
+# User uploads created at runtime
+uploads/*
+# Local database should not be committed to a public repository
+# Remove this line only if you intentionally use a private repo and want to ship seed data.
+database.db

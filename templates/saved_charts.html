@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saved Charts</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2 class="mb-4">
+📊 My Saved Charts
+</h2>
+
+{% if charts %}
+
+<table class="table table-bordered table-striped">
+
+<tr>
+<th>ID</th>
+<th>Chart Type</th>
+<th>Dataset</th>
+</tr>
+
+{% for chart in charts %}
+
+<tr>
+
+<td>{{ chart[0] }}</td>
+
+<td>{{ chart[1] }}</td>
+
+<td>{{ chart[2] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info">
+
+You haven't saved any charts yet.
+
+</div>
+
+{% endif %}
+
+<a href="/workspace" class="btn btn-primary">
+
+⬅ Back to Workspace
+
+</a>
+
+</div>
+
+</body>
+
+</html>

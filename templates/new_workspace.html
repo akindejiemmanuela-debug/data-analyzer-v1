@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Create New Workspace</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/new_workspace.css') }}">
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1>Create New Workspace</h1>
+
+        <p class="text-muted">
+
+            Choose a template to start your workspace.
+
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="school">
+
+                <div class="icon">🏫</div>
+
+                <h4>School</h4>
+
+                <p>
+
+                    Student results, grading, attendance and reports.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="business">
+
+                <div class="icon">🏪</div>
+
+                <h4>Business</h4>
+
+                <p>
+
+                    Sales, expenses, profit and customer records.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="church">
+
+                <div class="icon">⛪</div>
+
+                <h4>Church</h4>
+
+                <p>
+
+                    Attendance, offering and membership records.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="inventory">
+
+                <div class="icon">📦</div>
+
+                <h4>Inventory</h4>
+
+                <p>
+
+                    Stock, suppliers and warehouse management.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="farm">
+
+                <div class="icon">🌾</div>
+
+                <h4>Farm</h4>
+
+                <p>
+
+                    Crop records, harvest and production analysis.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="workspace-card" data-type="blank">
+
+                <div class="icon">📝</div>
+
+                <h4>Blank Workspace</h4>
+
+                <p>
+
+                    Start with an empty spreadsheet.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Create Workspace Modal -->
+
+<div class="modal fade" id="workspaceModal" tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Create Workspace
+
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<form
+id="workspaceForm"
+action="/create_workspace"
+method="POST">
+
+<input
+type="hidden"
+id="workspace_type"
+name="workspace_type">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Workspace Name
+
+</label>
+
+<input
+type="text"
+class="form-control"
+name="workspace_name"
+placeholder="Enter workspace name"
+required>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary w-100">
+
+Create Workspace
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/new_workspace.js') }}"></script>
+
+</body>
+
+</html>

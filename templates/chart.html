@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Create Chart</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h2>Create Visualization</h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <form action="/charts" method="POST">
+
+                <!-- Workspace -->
+
+                <input
+                    type="hidden"
+                    name="workspace_id"
+                    value="{{ workspace_id }}"
+                >
+
+                <!-- X AXIS -->
+
+                <div class="mb-3" id="xDiv">
+
+                    <label class="form-label">
+                        X Axis
+                    </label>
+
+                    <select
+                        name="x"
+                        id="xColumn"
+                        class="form-select"
+                    >
+
+                        {% for column in columns %}
+
+                        <option value="{{ column }}">
+
+                            {{ column }}
+
+                            {% if column in numeric_columns %}
+
+                                (Numeric)
+
+                            {% else %}
+
+                                (Text)
+
+                            {% endif %}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Y AXIS -->
+
+                <div class="mb-3" id="yDiv">
+
+                    <label class="form-label">
+                        Y Axis
+                    </label>
+
+                    <select
+                        name="y"
+                        id="yColumn"
+                        class="form-select"
+                    >
+
+                        {% for column in numeric_columns %}
+
+                        <option value="{{ column }}">
+
+                            {{ column }} (Numeric)
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- CHART TYPE -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Chart Type
+                    </label>
+
+                    <select
+                        name="chart"
+                        id="chartType"
+                        class="form-select"
+                    >
+
+                        <option value="bar">
+                            Bar
+                        </option>
+
+                        <option value="line">
+                            Line
+                        </option>
+
+                        <option value="scatter">
+                            Scatter
+                        </option>
+
+                        <option value="pie">
+                            Pie
+                        </option>
+
+                        <option value="histogram">
+                            Histogram
+                        </option>
+
+                        <option value="box">
+                            Box Plot
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100"
+                >
+
+                    📊 Generate Chart
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const chartType =
+    document.getElementById("chartType");
+
+const xDiv =
+    document.getElementById("xDiv");
+
+const yDiv =
+    document.getElementById("yDiv");
+
+
+function updateFields() {
+
+    const type =
+        chartType.value;
+
+
+    // ------------------------
+    // HISTOGRAM
+    // ------------------------
+
+    if (type === "histogram") {
+
+        xDiv.style.display = "none";
+
+        yDiv.style.display = "block";
+
+    }
+
+
+    // ------------------------
+    // BOX PLOT
+    // ------------------------
+
+    else if (type === "box") {
+
+        xDiv.style.display = "none";
+
+        yDiv.style.display = "block";
+
+    }
+
+
+    // ------------------------
+    // ALL OTHER CHARTS
+    // ------------------------
+
+    else {
+
+        xDiv.style.display = "block";
+
+        yDiv.style.display = "block";
+
+    }
+
+}
+
+
+chartType.addEventListener(
+    "change",
+    updateFields
+);
+
+
+updateFields();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ title }}</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#eef2f7;
+}
+
+.container{
+    margin-top:30px;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="card-header bg-primary text-white">
+
+<h2>{{ title }}</h2>
+
+</div>
+
+<div class="card-body">
+
+{{ table|safe }}
+
+<hr>
+
+<h4>📖 Plain English</h4>
+
+<div class="alert alert-info">
+{{ explanation|safe }}
+</div>
+
+<h4>💡 Key Insight</h4>
+
+<div class="alert alert-success">
+{{ insight|safe }}
+</div>
+
+<h4>🚀 Recommendation</h4>
+
+<div class="alert alert-warning">
+{{ recommendation|safe }}
+</div>
+
+<h4>📚 Learn</h4>
+
+<div class="alert alert-primary">
+{{ learn|safe }}
+</div>
+
+<h4>🤖 AI Summary</h4>
+
+<div class="alert alert-secondary">
+{{ ai_summary|safe }}
+</div>
+
+<hr>
+
+<div class="text-center">
+
+<a href="{{ back_url }}" class="btn btn-primary">
+
+⬅ Back
+
+</a>
+
+<a href="{{ download_url }}" class="btn btn-success">
+
+📥 Download
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

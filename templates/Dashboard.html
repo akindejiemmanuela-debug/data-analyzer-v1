@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<div class="container">
+
+<a class="navbar-brand" href="/">
+📊 Data Analyzer
+</a>
+
+<div>
+
+<a class="btn btn-outline-light me-2" href="/">Home</a>
+
+<a class="btn btn-outline-light me-2" href="{{ url_for('analysis', workspace_id=workspace_id) }}">Analysis</a>
+
+<a class="btn btn-outline-light me-2" href="{{ url_for('statistics', workspace_id=workspace_id) }}">Statistics📉</a>
+
+<a class="btn btn-outline-light me-2" href="{{ url_for('chart', workspace_id=workspace_id) }}">Charts 📊</a>
+
+<a class="btn btn-outline-light" href="{{ url_for('data_cleaning', workspace_id=workspace_id) }}">Cleaning</a>
+<a href="{{ url_for('download', workspace_id=workspace_id) }}" class="btn btn-success">
+    📥 Download Excel Report
+</a>
+<a class="btn btn-outline-light me-2" href="{{ url_for('edit', workspace_id=workspace_id) }}">edit 📝</a>
+<a class="btn btn-outline-light me-2" href="{{ url_for('preview', workspace_id=workspace_id) }}">preview 📃</a>
+<a class="btn btn-outline-light me-2" href="{{ url_for('search', workspace_id=workspace_id) }}">search 🔍 </a>
+
+<a href="/workspace" class="btn btn-secondary">
+
+⬅ Back to Workspace
+
+</a>
+
+</div>
+
+</div>
+</nav>
+<div class="container py-5">
+
+<h1 class="text-center mb-5">
+📊 Data Analysis Dashboard
+</h1>
+<div class="card p-4 mb-5">
+
+
+</div>
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card shadow text-center p-4 bg-primary text-white">
+
+<h5>Total Rows</h5>
+
+<div class="number">{{ rows }}</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow text-center p-4 bg-success text-white">
+
+<h5>Total Columns</h5>
+
+<div class="number">{{ columns }}</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow text-center p-4 bg-warning">
+
+<h5>Missing Values</h5>
+
+<div class="number">{{ missing }}</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow text-center p-4 bg-danger text-white">
+
+<h5>Duplicates</h5>
+
+<div class="number">{{ duplicates }}</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<h3 class="text-center mb-4">
+🚀 Quick Actions
+</h3>
+
+<div class="row g-4">
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('analysis', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>📈</h1>
+                <h5>Analysis</h5>
+                <p>Analyze a selected column.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('statistics', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>📊</h1>
+                <h5>Statistics</h5>
+                <p>Dataset statistics and summary.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('chart', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>📉</h1>
+                <h5>Charts</h5>
+                <p>Create interactive charts.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('correlation', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>🔗</h1>
+                <h5>Correlation</h5>
+                <p>Relationship between columns.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('ai', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>🤖</h1>
+                <h5>AI Insight</h5>
+                <p>Get intelligent insights about your dataset.</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-lg-3">
+        <a href="{{ url_for('dashboard_charts', workspace_id=workspace_id) }}" class="text-decoration-none">
+            <div class="card shadow action-card text-center p-3">
+                <h1>📊</h1>
+                <h5>AI Dashboard</h5>
+                <p>Visualize your data with smart charts, KPIs and summaries.</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<h3 class="text-center mb-4">
+🛠 Data Tools
+</h3>
+
+<div class="row g-3">
+
+    <div class="col-md-4">
+        <a href="{{ url_for('groupby', workspace_id=workspace_id) }}"
+           class="btn btn-outline-primary w-100 btn-tool">
+            Group By
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('pivot_table', workspace_id=workspace_id) }}"
+           class="btn btn-outline-success w-100 btn-tool">
+            Pivot Table
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('filter', workspace_id=workspace_id) }}"
+           class="btn btn-outline-warning w-100 btn-tool">
+            Filtering
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('sorting', workspace_id=workspace_id) }}"
+           class="btn btn-outline-dark w-100 btn-tool">
+            Sorting
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('data_cleaning', workspace_id=workspace_id) }}"
+           class="btn btn-outline-danger w-100 btn-tool">
+            Data Cleaning
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ url_for('download', workspace_id=workspace_id) }}"
+           class="btn btn-outline-success w-100 btn-tool">
+            📥 Export Excel Report
+        </a>
+    </div>
+
+    <!-- GRADING SYSTEM -->
+    
+        <div class="col-md-4">
+    <a href="{{ url_for('grading', workspace_id=workspace_id) }}"
+       class="btn btn-outline-primary w-100 btn-tool">
+        🎓 Grading System
+    </a>
+    </div>
+
+    <div class="col-md-4">
+        <form action="{{ url_for('generate_report') }}" method="POST">
+            <input type="hidden"
+                   name="workspace_id"
+                   value="{{ workspace_id }}">
+
+            <button type="submit"
+                    class="btn btn-outline-primary w-100 btn-tool">
+                📄 Generate Report
+            </button>
+        </form>
+    </div>
+
+</div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <a href="{{ url_for('edit', workspace_id=workspace_id) }}" class="btn btn-outline-info w-100">
+            ✏️ Edit Dataset
+        </a>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <a href="{{ url_for('kpi', workspace_id=workspace_id) }}" class="btn btn-outline-info w-100">
+            📋 KPI Summary
+        </a>
+    </div>
+</div>
+<hr class="my-5">
+
+<h3 class="text-center">
+📈 Dashboard Chart
+</h3>
+
+<div class="card shadow p-4">
+
+<canvas id="dashboardChart"></canvas>
+
+</div>
+<hr class="my-5">
+
+<h3 class="text-center">
+📋 Dataset Preview
+</h3>
+
+<div class="card shadow p-4">
+
+<div class="table-responsive">
+
+{{ preview|safe }}
+
+</div>
+</div>
+
+
+</div>
+<script>
+
+const labels = {{ chart_labels|tojson }};
+const values = {{ chart_values|tojson }};
+
+new Chart(document.getElementById("dashboardChart"), {
+
+    type: "line",
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            label: "Dataset",
+
+            data: values,
+
+            borderColor: "#198754",
+
+            backgroundColor: "rgba(25,135,84,0.2)",
+
+            fill: true,
+
+            tension: 0.4,
+
+            borderWidth: 3
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                display: true
+
+            }
+
+        },
+
+        animation: {
+
+            duration: 2000
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

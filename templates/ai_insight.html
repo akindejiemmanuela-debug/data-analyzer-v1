@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Insight</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-primary text-white">
+
+<h2>🤖 AI Dataset Insight</h2>
+
+</div>
+
+<div class="card-body">
+
+<h4 class="mb-3">📊 Insights</h4>
+
+{% for item in insights %}
+
+<div class="alert alert-info">
+
+{{ item }}
+
+</div>
+
+{% endfor %}
+
+<hr>
+
+<h4 class="mb-3">💡 AI Recommendations</h4>
+
+{% for item in recommendations %}
+
+<div class="alert alert-warning">
+
+{{ item }}
+
+</div>
+
+{% endfor %}
+<h3 class="mt-4">💬 Ask AI</h3>
+
+<form action="/ask_ai" method="POST">
+
+<div class="input-group">
+
+<input
+type="text"
+name="question"
+class="form-control"
+placeholder="Ask something about your dataset..."
+required>
+
+<button class="btn btn-primary">
+🤖 Ask AI
+</button>
+
+</div>
+
+</form>
+<a href="/dashboard" class="btn btn-success mt-3">
+
+⬅ Back to Dashboard
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

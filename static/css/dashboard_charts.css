@@ -1,0 +1,63 @@
+body{
+    background:#f5f7fb;
+}
+
+.card{
+    border:none;
+    border-radius:12px;
+}
+
+.table{
+    font-size:15px;
+}
+
+.table th{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:10px;
+}
+
+.table td{
+    text-align:center;
+    padding:8px;
+}
+
+.table-hover tbody tr:hover{
+    background:#eef5ff;
+}
+
+.table-responsive{
+    border-radius:10px;
+}
+
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode .card{
+    background:#1e1e1e;
+    color:white;
+}
+
+.dark-mode .card-header{
+    background:#2b2b2b;
+    color:white;
+}
+
+.dark-mode table{
+    color:white;
+}
+
+.dark-mode th{
+    background:#333;
+}
+
+.dark-mode td{
+    background:#222;
+}
+
+.dark-mode .btn{
+    border-color:#777;
+}

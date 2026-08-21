@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Correlation Matrix</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-danger text-white">
+
+            <h2 class="text-center">
+                Correlation Matrix
+            </h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <p class="text-center">
+                Generate a correlation matrix for all numeric columns in the dataset.
+            </p>
+
+            <form action="/correlation" method="POST">
+<input type="hidden" name="workspace_id" value="{{ workspace_id }}">
+                <button class="btn btn-danger w-100">
+
+                    Generate Correlation Matrix
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

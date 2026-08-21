@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Column Analysis</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white">
+
+            <h2 class="text-center">
+                Column Analysis
+            </h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <form action="/analysis" method="POST">
+<input type="hidden" name="workspace_id" value="{{ workspace_id }}">
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Select Column
+                    </label>
+
+                    <select name="column" class="form-select">
+
+                        {% for column in columns %}
+
+                        <option value="{{ column }}">
+                            {{ column }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Select Analysis
+                    </label>
+
+                    <select name="operation" class="form-select">
+
+                        <option value="count">Count</option>
+                        <option value="sum">Sum</option>
+                        <option value="mean">Mean</option>
+                        <option value="median">Median</option>
+                        <option value="mode">Mode</option>
+                        <option value="min">Minimum</option>
+                        <option value="max">Maximum</option>
+                        <option value="std">Standard Deviation</option>
+                        <option value="var">Variance</option>
+                        <option value="skew">Skewness</option>
+                        <option value="kurt">Kurtosis</option>
+                        <option value="nunique">Unique Values</option>
+
+                    </select>
+
+                </div>
+
+                <button class="btn btn-primary w-100">
+
+                    Analyze Column
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

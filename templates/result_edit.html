@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Edit Result</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#f5f7fb;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+}
+
+.card-header{
+    border-radius:15px 15px 0 0 !important;
+}
+
+.table-responsive{
+    max-height:500px;
+    overflow:auto;
+}
+
+.action-btn{
+    min-width:170px;
+    margin:5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-success text-white">
+
+<h2 class="mb-1">
+✅ Dataset Updated Successfully
+</h2>
+
+<p class="mb-0">
+Your dataset has been edited successfully.
+You can continue editing, analyze the data, or download the updated dataset.
+</p>
+
+</div>
+
+<div class="card-body">
+
+<div class="alert alert-success">
+
+<strong>Success!</strong>
+
+Your changes have been saved permanently.
+
+</div>
+
+<div class="table-responsive">
+
+{{ table|safe }}
+
+</div>
+
+<hr>
+
+<div class="text-center">
+
+<a href="/edit" class="btn btn-primary action-btn">
+✏ Continue Editing
+</a>
+
+<a href="/analysis" class="btn btn-info action-btn">
+📊 Analyze Dataset
+</a>
+
+<a href="{{ download_url }}" class="btn btn-success action-btn">
+    ⬇ Download Excel Report
+</a>
+
+<a href="/" class="btn btn-dark action-btn">
+🏠 Dashboard
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

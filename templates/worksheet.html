@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ workspace_name }}</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/worksheet.css') }}">
+
+<!-- JSpreadsheet -->
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/handsontable.min.css') }}">
+
+<script src="{{ url_for('static', filename='js/handsontable.min.js') }}"></script>
+</head>
+
+<body>
+
+<input
+type="hidden"
+id="workspace_id"
+value="{{ workspace_id }}">
+
+<div class="worksheet-page">
+
+<!-- ================= HEADER ================= -->
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+<div>
+
+<h3 class="mb-0">
+
+📄 {{ workspace_name }}
+
+</h3>
+
+<small class="text-muted">
+
+{{ workspace_type|title }} Workspace
+
+</small>
+
+<br>
+
+<small
+id="saveStatus"
+class="text-success">
+
+Ready
+
+</small>
+
+</div>
+
+<div class="d-flex gap-2">
+
+<button
+class="btn btn-outline-secondary">
+
+🔍
+
+</button>
+
+<button
+class="btn btn-outline-secondary">
+
+⚙
+
+</button>
+
+<button
+class="btn btn-primary">
+
+Share
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= TOOLBAR ================= -->
+
+<div class="toolbar">
+
+    <button class="tool-btn" onclick="goWorkspace()">
+        🏠 Workspace
+    </button>
+
+    <button class="tool-btn" onclick="saveWorksheet()">
+        💾 Save
+    </button>
+
+   <button class="tool-btn" onclick="copyCell()">
+    📄 Copy
+</button>
+
+<button class="tool-btn" onclick="cutCell()">
+    ✂ Cut
+</button>
+
+<button class="tool-btn" onclick="pasteCell()">
+    📋 Paste
+</button>
+    
+     
+       <button class="tool-btn" onclick="exportWorksheet()">
+        📤 Export
+    </button>
+
+    <button class="tool-btn" onclick="addRow()">
+        ➕ Row
+    </button>
+
+    <button class="tool-btn" onclick="addColumn()">
+        📋 Column
+    </button>
+
+    <button class="tool-btn" onclick="deleteSelected()">
+        🗑 Delete
+    </button>
+
+    <button class="tool-btn" onclick="undoWorksheet()">
+        ↶ Undo
+    </button>
+
+    <button class="tool-btn" onclick="redoWorksheet()">
+        ↷ Redo
+    </button>
+
+    <button class="tool-btn" onclick="analyzeWorksheet()">
+        📊 Analyze
+    </button>
+
+    <button class="tool-btn" onclick="openAI()">
+        🤖 Ask AI
+    </button>
+
+</div>
+<div class="formula-bar d-flex align-items-center mb-2">
+
+    <span class="me-2 fw-bold">fx</span>
+
+    <input
+        type="text"
+        id="formulaInput"
+        class="form-control"
+        placeholder="Enter value or formula">
+<button class="tool-btn" onclick="boldCell()">
+    <b>B</b>
+</button>
+
+<button class="tool-btn" onclick="italicCell()">
+    <i>I</i>
+</button>
+
+<button class="tool-btn" onclick="underlineCell()">
+    <u>U</u>
+</button>
+
+<input
+type="color"
+id="cellColor"
+onchange="changeCellColor()">
+
+<input
+type="color"
+id="textColor"
+onchange="changeTextColor()">
+
+</div>
+
+<!-- ================= SPREADSHEET ================= -->
+
+<div id="spreadsheet"></div>
+
+<!-- ================= SHEET TABS ================= -->
+
+<div class="sheet-tabs mt-3">
+
+<button class="sheet-btn active">
+
+Sheet 1
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="newSheet()">
+
+＋
+
+</button>
+
+</div>
+
+</div>
+<script>
+const worksheetColumns = {{ columns|tojson }};
+const savedWorksheet = {{ worksheet_data|tojson }};
+</script>
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="{{ url_for('static', filename='js/spreadsheet.js') }}"></script>
+
+</body>
+
+</html>
